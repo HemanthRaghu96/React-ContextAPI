@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Cart from "./Cart";
-import { CardState } from "./App";
+import { Context } from "./UserProvider";
 
 const CartDetails = () => {
-  const { filterId } = CardState(); // Destructure filterId from the context
+  const { filterId } = useContext(Context); // Destructure filterId from the context
 
   console.log(filterId);
 

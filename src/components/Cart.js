@@ -1,16 +1,23 @@
-import React from "react";
-import { CardState } from "./App";
+import React, { useContext, useState } from "react";
+import { Context } from "./UserProvider";
 
 const Cart = ({ product }) => {
-  const { count, setCount } = CardState();
+  const { removeFromCart } = useContext(Context);
+  const [count,setCount]=useState(1)
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    if(count<product.stock){
+      setCount(count + 1);
+    }
+    
   };
   const handleDecrement = () => {
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1);
     }
+  };
+  const handleRemoveFromCart = () => {
+    removeFromCart(product.id);
   };
   return (
     <section>
@@ -44,6 +51,7 @@ const Cart = ({ product }) => {
             </div>
             <p className="font-poppins mt-1">Price : ₹{((product.price -(product.price ) * (product.discountPercentage )/100) ).toFixed(2)}</p>
           <p className="font-poppins mt-1">M.R.P :₹<span className="line-through"> {product.price}</span></p>
+          <button className="font-poppins p-1 border bg-red-400 text-white rounded m-2  hover:bg-black hover:text-white" onClick={handleRemoveFromCart}>Remove</button>
           </div>
         </div>
         <hr />
@@ -64,7 +72,7 @@ const Cart = ({ product }) => {
           </div>
           <div>
             <p className="m-2">
-            ₹{((product.price -(product.price ) * (product.discountPercentage )/100) )*count.toFixed(2)}
+            ₹{(((product.price -(product.price ) * (product.discountPercentage )/100) )*count).toFixed(2)}
             </p>
           </div>
         </div>

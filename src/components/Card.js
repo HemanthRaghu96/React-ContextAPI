@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { CardState } from "./App";
+import { useContext, useState } from "react";
+import { Context } from "./UserProvider";
 const Card = ({ product }) => {
   //on click pass id to cart n filter
-  const { filterId, setFilterId } = CardState();
+  const { filterId, setFilterId } = useContext(Context);
   const [changeButton, setChangeButton] = useState(false);
 
   const handleAdd = (product) => {
